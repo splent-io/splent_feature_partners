@@ -1,0 +1,26 @@
+{# Public partners strip. Rendered by the home.section hook with:
+     partners : active partners (each has .logo_url, .name, .link)
+     cfg      : get_config("partners") -> title / scope / grayscale
+   Renders nothing when there are no active partners. #}
+{% if partners %}
+<section class="partners-strip{{ ' partners-strip--grayscale' if cfg.grayscale in (true, '1', 1, 'true') else '' }}">
+    <div class="container">
+        {% if cfg.title %}
+        <h2 class="partners-strip__title">{{ cfg.title }}</h2>
+        {% endif %}
+        <div class="partners-strip__row">
+            {% for p in partners %}
+            {% if p.link %}
+            <a class="partners-strip__item" href="{{ p.link }}" target="_blank" rel="noopener" title="{{ p.name }}">
+                <img class="partners-strip__logo" src="{{ p.logo_url }}" alt="{{ p.name }}" loading="lazy">
+            </a>
+            {% else %}
+            <span class="partners-strip__item" title="{{ p.name }}">
+                <img class="partners-strip__logo" src="{{ p.logo_url }}" alt="{{ p.name }}" loading="lazy">
+            </span>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}

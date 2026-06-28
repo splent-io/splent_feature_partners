@@ -1,0 +1,75 @@
+/* ══════════════════════════════════════════════════════════════════════════
+   partners-strip — homepage row of collaborating organisations' logos.
+   Token-driven: every colour/space/radius comes from the theme's --brand-*
+   custom properties so a skin restyles it for free. Loaded via the asset
+   registry (register_asset in __init__.init_feature), never inlined.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.partners-strip {
+    padding: var(--brand-space-xl, 3rem) 0;
+    background: var(--brand-surface-muted, var(--brand-surface, transparent));
+}
+
+.partners-strip__title {
+    margin: 0 0 var(--brand-space-lg, 2rem);
+    text-align: center;
+    font-size: var(--brand-font-size-h2, 1.5rem);
+    font-weight: var(--brand-font-weight-bold, 700);
+    color: var(--brand-text, inherit);
+}
+
+/* ── Responsive logo row: wraps and centres, even spacing ─────────────────── */
+.partners-strip__row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--brand-space-lg, 2rem) var(--brand-space-xl, 3rem);
+}
+
+.partners-strip__item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 1 auto;
+    text-decoration: none;
+}
+
+.partners-strip__logo {
+    display: block;
+    max-width: var(--partners-logo-max-width, 160px);
+    max-height: var(--partners-logo-max-height, 56px);
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    transition: opacity .2s ease, filter .2s ease, transform .2s ease;
+}
+
+/* ── Greyscale option (admin "Greyscale logos" setting) ───────────────────── */
+.partners-strip--grayscale .partners-strip__logo {
+    filter: grayscale(1);
+    opacity: .65;
+}
+
+.partners-strip--grayscale .partners-strip__item:hover .partners-strip__logo,
+.partners-strip--grayscale .partners-strip__item:focus-visible .partners-strip__logo {
+    filter: grayscale(0);
+    opacity: 1;
+}
+
+/* Subtle lift on hover for linked logos, regardless of greyscale. */
+.partners-strip__item[href]:hover .partners-strip__logo,
+.partners-strip__item[href]:focus-visible .partners-strip__logo {
+    transform: translateY(-2px);
+}
+
+@media (max-width: 575.98px) {
+    .partners-strip__row {
+        gap: var(--brand-space-md, 1.5rem) var(--brand-space-lg, 2rem);
+    }
+
+    .partners-strip__logo {
+        max-width: var(--partners-logo-max-width-sm, 120px);
+        max-height: var(--partners-logo-max-height-sm, 44px);
+    }
+}

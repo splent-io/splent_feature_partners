@@ -1,0 +1,70 @@
+{% extends "base_template.html" %}
+
+{% block title %}Partners{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1 class="h3 mb-0">Partners</h1>
+        <p class="text-muted mb-0">Collaborating organisations shown on the homepage strip.</p>
+    </div>
+    <a href="{{ url_for('partners.admin_new') }}" class="btn btn-primary">+ Add partner</a>
+</div>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% for category, message in messages %}
+        <div class="alert alert-{{ 'danger' if category == 'danger' else 'success' }} py-2">{{ message }}</div>
+    {% endfor %}
+{% endwith %}
+
+<div class="card">
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead>
+                <tr>
+                    <th style="width:64px">Logo</th>
+                    <th>Name</th>
+                    <th style="width:90px" class="text-center">Active</th>
+                    <th style="width:80px" class="text-center">Order</th>
+                    <th style="width:150px" class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in partners %}
+                <tr>
+                    <td>
+                        {% if p.logo_url %}
+                        <img src="{{ p.logo_url }}" alt="" style="width:44px;height:44px;border-radius:6px;object-fit:contain;background:#f8f9fa">
+                        {% else %}
+                        <span class="d-inline-flex align-items-center justify-content-center bg-light text-muted" style="width:44px;height:44px;border-radius:6px">{{ (p.name[:1] | upper) or '?' }}</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <strong>{{ p.name or '(unnamed)' }}</strong>
+                        {% if p.link %}<div class="text-muted small"><a href="{{ p.link }}" target="_blank" rel="noopener">{{ p.link }}</a></div>{% endif %}
+                    </td>
+                    <td class="text-center">
+                        {% if p.active %}
+                        <span class="badge bg-success">Active</span>
+                        {% else %}
+                        <span class="badge bg-secondary">Hidden</span>
+                        {% endif %}
+                    </td>
+                    <td class="text-center">{{ p.order }}</td>
+                    <td class="text-end">
+                        <a href="{{ url_for('partners.admin_edit', id=p.id) }}" class="btn btn-sm btn-outline-primary">Edit</a>
+                        <form method="POST" action="{{ url_for('partners.admin_delete', id=p.id) }}" class="d-inline" onsubmit="return confirm('Remove {{ p.name or 'this partner' }}?')">
+                            <button class="btn btn-sm btn-outline-danger" type="submit" title="Remove"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+                        </form>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="5" class="text-center text-muted py-4">No partners yet. Add your first collaborating organisation.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
