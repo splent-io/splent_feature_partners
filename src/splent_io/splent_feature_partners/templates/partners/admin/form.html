@@ -4,7 +4,7 @@
 {% block title %}{{ 'Edit partner' if partner else 'Add partner' }}{% endblock %}
 
 {% block content %}
-<div class="d-flex justify-content-between align-items-center mb-4">
+<div class="d-flex flex-column align-items-start gap-2 mb-4">
     <h1 class="h3 mb-0">{{ 'Edit partner' if partner else 'Add partner' }}</h1>
     <a href="{{ url_for('partners.admin_index') }}" class="btn btn-outline-secondary">← Back to partners</a>
 </div>
