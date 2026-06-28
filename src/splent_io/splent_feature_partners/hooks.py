@@ -34,9 +34,7 @@ def partners_section():
         return ""
     if not partners:
         return ""
-    return Markup(
-        render_template("partners/strip.html", partners=partners, cfg=cfg)
-    )
+    return Markup(render_template("partners/strip.html", partners=partners, cfg=cfg))
 
 
 def partners_admin_link():

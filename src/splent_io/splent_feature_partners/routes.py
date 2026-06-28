@@ -60,9 +60,7 @@ def admin_new():
         partner = partners_service.create(**data)
         flash(f"Added {partner.name or 'partner'}.", "success")
         return redirect(url_for("partners.admin_index"))
-    return render_template(
-        "partners/admin/form.html", partner=None, media=_images()
-    )
+    return render_template("partners/admin/form.html", partner=None, media=_images())
 
 
 @partners_bp.route("/admin/partners/<int:id>/edit", methods=["GET", "POST"])
@@ -81,9 +79,7 @@ def admin_edit(id):
         partners_service.update(partner, **data)
         flash(f"Updated {partner.name or 'partner'}.", "success")
         return redirect(url_for("partners.admin_index"))
-    return render_template(
-        "partners/admin/form.html", partner=partner, media=_images()
-    )
+    return render_template("partners/admin/form.html", partner=partner, media=_images())
 
 
 @partners_bp.route("/admin/partners/<int:id>/delete", methods=["POST"])
