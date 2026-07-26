@@ -25,8 +25,11 @@ cli_version = "1.11.0"
 
 # ── Feature Contract (auto-generated) ────────────────────────────────────────
 # Do not edit manually — re-run `splent feature:contract --write` to refresh.
+# Preserved across refreshes: description, category, tags, env, and
+# requires.features_manual (dependencies invisible to static analysis).
 [tool.splent.contract]
-description = "partners feature"
+description = "Partner logos and links (home section + admin CRUD)"
+archetype = "full"
 
 [tool.splent.contract.provides]
 routes     = ["/admin/partners", "/admin/partners/<int:id>/delete", "/admin/partners/<int:id>/edit", "/admin/partners/new", "/partners"]
@@ -40,7 +43,7 @@ translations = []
 docker     = []
 
 [tool.splent.contract.requires]
-features = []
+features = ["media"]
 env_vars = []
 signals  = []
 
