@@ -24,25 +24,36 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    gap: var(--brand-space-lg, 2rem) var(--brand-space-xl, 3rem);
+    gap: var(--brand-space-md, 1.5rem) var(--brand-space-lg, 2rem);
 }
 
+/* Every item is the same fixed-height box; the logo letterboxes inside it
+   (object-fit: contain), so wide logos never dwarf square ones. */
 .partners-strip__item {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     flex: 0 1 auto;
+    min-width: 0;
+    height: var(--partners-logo-height, 112px);
+    max-width: var(--partners-logo-max-width, 240px);
     text-decoration: none;
 }
 
 .partners-strip__logo {
     display: block;
-    max-width: var(--partners-logo-max-width, 160px);
-    max-height: var(--partners-logo-max-height, 56px);
     width: auto;
-    height: auto;
+    height: 100%;
+    max-width: 100%;
     object-fit: contain;
     transition: opacity .2s ease, filter .2s ease, transform .2s ease;
+}
+
+/* One row on desktop: items shrink together instead of wrapping. */
+@media (min-width: 768px) {
+    .partners-strip__row {
+        flex-wrap: nowrap;
+    }
 }
 
 /* ── Greyscale option (admin "Greyscale logos" setting) ───────────────────── */
@@ -65,11 +76,11 @@
 
 @media (max-width: 575.98px) {
     .partners-strip__row {
-        gap: var(--brand-space-md, 1.5rem) var(--brand-space-lg, 2rem);
+        gap: var(--brand-space-md, 1.5rem);
     }
 
-    .partners-strip__logo {
-        max-width: var(--partners-logo-max-width-sm, 120px);
-        max-height: var(--partners-logo-max-height-sm, 44px);
+    .partners-strip__item {
+        height: var(--partners-logo-height-sm, 88px);
+        max-width: var(--partners-logo-max-width-sm, 180px);
     }
 }
