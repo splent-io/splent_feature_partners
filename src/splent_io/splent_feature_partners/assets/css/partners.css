@@ -53,6 +53,7 @@
    the same slot in the row and swaps in the logo without a layout change. */
 .partners-strip__item--wordmark {
     padding: 0 var(--brand-space-md, 1.5rem);
+    min-width: 7rem;
     border: 1px solid var(--brand-border, rgba(0, 0, 0, .12));
     border-radius: var(--brand-radius, 8px);
     background: var(--brand-surface, transparent);
@@ -60,12 +61,15 @@
 }
 
 .partners-strip__name {
-    font-family: var(--brand-font-display, inherit);
+    font-family: var(--brand-font-body, system-ui, sans-serif);
     font-weight: var(--brand-font-weight-bold, 700);
-    font-size: 1rem;
-    letter-spacing: .02em;
+    font-size: .95rem;
+    letter-spacing: .01em;
     text-align: center;
-    white-space: nowrap;
+    white-space: normal;
+    overflow-wrap: break-word;
+    hyphens: none;
+    line-height: 1.25;
 }
 
 /* One row on desktop: items shrink together instead of wrapping. */
