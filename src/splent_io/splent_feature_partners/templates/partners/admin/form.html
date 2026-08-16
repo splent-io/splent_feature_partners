@@ -20,8 +20,9 @@
     <div class="card-body">
         <div class="row g-3">
             <div class="col-md-6">
-                <label class="form-label">Name</label>
+                <label class="form-label">Name *</label>
                 <input name="name" class="form-control" value="{{ partner.name if partner else '' }}" placeholder="Organisation name">
+                <div class="form-text">Shown as a wordmark until a logo is added.</div>
             </div>
             <div class="col-md-6">
                 <label class="form-label">Link URL</label>
@@ -39,7 +40,7 @@
                 </div>
             </div>
             <div class="col-12">
-                <label class="form-label">Logo *</label>
+                <label class="form-label">Logo</label>
                 {{ media_picker("media_id", partner.media_id if partner else None, media, value_attr="id") }}
                 <div class="form-text">Pick a logo from the media library. Upload new logos in /admin/media.</div>
             </div>

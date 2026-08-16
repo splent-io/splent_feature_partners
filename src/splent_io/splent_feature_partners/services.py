@@ -11,13 +11,19 @@ class PartnersService(BaseService):
         super().__init__(PartnersRepository())
 
     def active_partners(self):
-        """Active partners that still have a logo, in display order."""
+        """Active partners in display order.
+
+        A partner without a logo is still a partner: the strip renders its
+        name as a wordmark until somebody uploads the logo, so a sponsor
+        confirmed the day before the event appears the same day. Only
+        nameless AND logoless rows are skipped, having nothing to show.
+        """
         partners = (
             Partner.query.filter_by(active=True)
             .order_by(Partner.order.asc(), Partner.id.asc())
             .all()
         )
-        return [p for p in partners if p.media is not None]
+        return [p for p in partners if p.media is not None or (p.name or "").strip()]
 
     def all_partners(self):
         return Partner.query.order_by(Partner.order.asc(), Partner.id.asc()).all()

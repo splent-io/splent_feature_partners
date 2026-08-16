@@ -6,8 +6,8 @@ class Partner(db.Model):
 
     The logo comes from the media library (``media_id`` -> MediaItem); the
     feature only REFERENCES it, so logos are uploaded/managed in /admin/media.
-    ON DELETE SET NULL keeps the partner if its logo is removed (the render
-    skips logoless ones).
+    ON DELETE SET NULL keeps the partner if its logo is removed; the strip
+    then shows the name as a wordmark until a new logo is picked.
     """
 
     __tablename__ = "partner"

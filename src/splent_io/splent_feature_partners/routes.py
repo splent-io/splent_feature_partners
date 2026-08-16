@@ -54,8 +54,8 @@ def admin_index():
 def admin_new():
     if request.method == "POST":
         data = _form_to_data(request.form)
-        if not data["media_id"]:
-            flash("A logo is required.", "danger")
+        if not data["name"] and not data["media_id"]:
+            flash("Give the partner a name or a logo.", "danger")
             return redirect(url_for("partners.admin_new"))
         partner = partners_service.create(**data)
         flash(f"Added {partner.name or 'partner'}.", "success")
@@ -73,8 +73,8 @@ def admin_edit(id):
         abort(404)
     if request.method == "POST":
         data = _form_to_data(request.form)
-        if not data["media_id"]:
-            flash("A logo is required.", "danger")
+        if not data["name"] and not data["media_id"]:
+            flash("Give the partner a name or a logo.", "danger")
             return redirect(url_for("partners.admin_edit", id=id))
         partners_service.update(partner, **data)
         flash(f"Updated {partner.name or 'partner'}.", "success")

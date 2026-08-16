@@ -49,6 +49,25 @@
     transition: opacity .2s ease, filter .2s ease, transform .2s ease;
 }
 
+/* A partner that has no logo yet shows its name as a wordmark, so it takes
+   the same slot in the row and swaps in the logo without a layout change. */
+.partners-strip__item--wordmark {
+    padding: 0 var(--brand-space-md, 1.5rem);
+    border: 1px solid var(--brand-border, rgba(0, 0, 0, .12));
+    border-radius: var(--brand-radius, 8px);
+    background: var(--brand-surface, transparent);
+    color: var(--brand-heading, inherit);
+}
+
+.partners-strip__name {
+    font-family: var(--brand-font-display, inherit);
+    font-weight: var(--brand-font-weight-bold, 700);
+    font-size: 1rem;
+    letter-spacing: .02em;
+    text-align: center;
+    white-space: nowrap;
+}
+
 /* One row on desktop: items shrink together instead of wrapping. */
 @media (min-width: 768px) {
     .partners-strip__row {
